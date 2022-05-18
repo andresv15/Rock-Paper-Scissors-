@@ -8,3 +8,46 @@ h1 {
     justify-content: center;
     text-align: center;
 }
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    boorder:solid;
+    border-color: red;
+    height 140px;
+    width: 140px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.scorecard {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+}
+
+#playerScore,
+computerScore {
+    font-size: 32px;
+    font-weight:lighter;
+    padding: 20px;
+}
+.buttons {
+    display: center;
+    gap: 20px
+}
+.poof {
+    display: none;
+}
+.replayBtn {
+    font-size:30px;
+    font-weight: bolder;
+    height: 125px;
+    weight: 245px;
+    border: soldi;
+    border-color: red;
+}
