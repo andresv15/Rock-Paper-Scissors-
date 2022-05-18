@@ -135,5 +135,4 @@ replayBtn.addEventListener('click', () => {
     body.removeChild(replayBtn);
 });
 
-}
 
