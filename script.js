@@ -60,23 +60,80 @@ function playRound(playerSelection, computerSelection) {
                 computerWin++;
                 roundCoun++;
                 head.textContent =`Youse lose, ${computerSelection} nrsyd ${PlayerSelection.toLowerCase()}!`;
-            break;
+                break;
             default;
                 return "Uh no.. something went wrong here.";
                 // Created in case computer play functions are not working probably
         }
     } else if (playerSelection === 'Scissors') {
         switch (computerSelection) {
+            case 'paper':
+                playerWin++;
+                roundCount++;
+                head.textContent = `You win, ${playerSelection.toLowerCase()} beats ${computerSelection}!`;
+                 break;
             case 'rock':
-                
+                computerWin++;
+                roundCount++;
+                head.textContent = `You lose, ${computerSelection.toLowerCase()} beats ${playerSelection}!`;
+                break;
+            case 'scissors':
+                    roundCount++;
+                    head.textContent = `Its a draw you both picked ${playerSelection.toLowerCase}!`;
+                break;
+                default:
+                    return "Uh no.. something went wrong here.";
+                    //a function in case computer play functions are not working properly
+            
+
         }
-    }
+    }else {
+        return `You have choose between Rock, Paper, and Scissors! Please Try Again!`
 
 
+    }
+}
+const body = document.querySelector('body');
+const head = document.querySelector('h1');
+const buttons = document.querySelector('button');
+const playerScore = document.querySelector('#playerScore');
+const computerScore = document.querySelector('#computerScore');
+const  replayBtn = document.querySelector('button');
+replayBtn.classList.add('replayBTn');
+replayBtn.textContent = 'Play Again';
 
-        }
-    }
-            }
-    }
+buttons.forEach((button)=> {
+    button.addEventListener('click', () => {
+        if (playerWin === 5 || computerWin === 5) {
+            console.log(`*start noises`);
+        }else {
+            playRound (button.id,computerPlay());
+            playerScore.textContent = 'player: ${playerWin}';
+            computerScore.textContent = 'computer: ${computerWin}';
+         if (playerWin ===5) {
+                head.textContent = 'Congratulations! You won a Game of RPS!';
+                buttons.forEach((button) => {
+                    button.classList.toggle('proof')
+                });
+                body.appendChild(replayBtn);
+            }else if (computerWin ===5) {
+                head.textContent = 'oh no!! You have lost the game to the computer.Keep on practing and Best of luck next time!'
+                buttons.forEach((button) => {
+                    button.classList.toggle('proof')
+                 } );
+                 body.appendChild(replayBtn);
+                }
+        }    
+    });
+}); 
+    
+replayBtn.addEventListener('click', () => {
+    reset();
+    buttons.forEach((button) => {
+        button.classLIst.toggle('proof')
+    });
+    body.removeChild(replayBtn);
+});
+
 }
 
