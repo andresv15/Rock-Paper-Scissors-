@@ -1,53 +1,54 @@
-* {
-   margin: 0;
-   padding: 0; 
-   background-color: grey;
-}
+<!-- index.html -->
 
-h1 {
-    justify-content: center;
-    text-align: center;
-}
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,
+				initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<title>Rock Paper Scissor</title>
+</head>
+<body>
+	<section class="game">
+		<!--Title -->
+		<div class="title">Rock Paper Scissor</div>
+		
+		<!--Display Score of player and computer -->
+		<div class="score">
+			<div class="playerScore">
+				<h2>Player</h2>
+				<p class="p-count count">0</p>
 
-button {
-    boorder:solid;
-    border-color: red;
-    height 140px;
-    width: 140px;
-    font-size: 20px;
-    font-weight: bolder;
-}
+			</div>	
+			<div class="computerScore">
+				<h2>Computer</h2>
+				<p class="c-count count">0</p>
 
-.scorecard {
-    display: flex;
-    gap: 50px;
-    justify-content: center;
-}
+			</div>
+		</div>
+	
+		<div class="move">Choose your move</div>
+		
+		<!--Number of moves left before game ends -->
+		<div class="movesleft">Moves Left: 10 </div>
+		
+		<!--Options available to player to play game -->
+		<div class="options">
+			<button class="rock">Rock</button>
+			<button class="paper">Paper</button>
+			<button class="scissor">Scissors</button>
+		</div>
+		
+		<!--Final result of game -->
+		<div class="result"></div>
+		
+		<!--Reload the game -->
+		<button class="reload"></button>
 
-#playerScore,
-computerScore {
-    font-size: 32px;
-    font-weight:lighter;
-    padding: 20px;
-}
-.buttons {
-    display: center;
-    gap: 20px
-}
-.poof {
-    display: none;
-}
-.replayBtn {
-    font-size:30px;
-    font-weight: bolder;
-    height: 125px;
-    weight: 245px;
-    border: soldi;
-    border-color: red;
-}
+	</section>
+
+	<script src="script.js"></script>
+</body>
+</html>
