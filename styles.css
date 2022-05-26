@@ -87,7 +87,7 @@
 }
 
 /* Responsive Design */
-@media screen and (max-width: 612px)
+@media screen and (max-width: 700px)
 	.view{
 	.title{
 		text-align: center;
