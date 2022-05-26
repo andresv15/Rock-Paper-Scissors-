@@ -1,138 +1,130 @@
-// Creating variables to be able to keep score for each player
-let playerWin = 0;
-let computerWin = 0;
-let roundCount = 1;
+// Complete logic of game inside this function
+const game = () => {
+	let playerScore = 0;
+	let computerScore = 0;
+	let moves = 0;
 
-//Resets the score and round to start a new game 
-function reset() {
-    playerWin = 0;
-    compuerWin = 0;
-    roundCount = 0;
-    head.textContent ='Time to play Some virtual Rock, Paper, Scissors!'
-    playerScore.textContent = 'Player: 0';
-    computerScore.textContent = 'Computer: 0';
+
+	// Function to
+	const playGame = () => {
+		const rockBtn = document.querySelector('.rock');
+		const paperBtn = document.querySelector('.paper');
+		const scissorBtn = document.querySelector('.scissor');
+		const playerOptions = [rockBtn,paperBtn,scissorBtn];
+		const computerOptions = ['rock','paper','scissors']
+		
+		// Function to start playing game
+		playerOptions.forEach(option => {
+			option.addEventListener('click',function(){
+
+				const movesLeft = document.querySelector('.movesleft');
+				moves++;
+				movesLeft.innerText = `Moves Left: ${10-moves}`;
+				
+
+				const choiceNumber = Math.floor(Math.random()*3);
+				const computerChoice = computerOptions[choiceNumber];
+
+				// Function to check who wins
+				winner(this.innerText,computerChoice)
+				
+				// Calling gameOver function after 10 moves
+				if(moves == 10){
+					gameOver(playerOptions,movesLeft);
+				}
+			})
+		})
+		
+	}
+
+	// Function to decide winner
+	const winner = (player,computer) => {
+		const result = document.querySelector('.result');
+		const playerScoreBoard = document.querySelector('.p-count');
+		const computerScoreBoard = document.querySelector('.c-count');
+		player = player.toLowerCase();
+		computer = computer.toLowerCase();
+		if(player === computer){
+			result.textContent = 'Tie'
+		}
+		else if(player == 'rock'){
+			if(computer == 'paper'){
+				result.textContent = 'Computer Won';
+				computerScore++;
+				computerScoreBoard.textContent = computerScore;
+
+			}else{
+				result.textContent = 'Player Won'
+				playerScore++;
+				playerScoreBoard.textContent = playerScore;
+			}
+		}
+		else if(player == 'scissors'){
+			if(computer == 'rock'){
+				result.textContent = 'Computer Won';
+				computerScore++;
+				computerScoreBoard.textContent = computerScore;
+			}else{
+				result.textContent = 'Player Won';
+				playerScore++;
+				playerScoreBoard.textContent = playerScore;
+			}
+		}
+		else if(player == 'paper'){
+			if(computer == 'scissors'){
+				result.textContent = 'Computer Won';
+				computerScore++;
+				computerScoreBoard.textContent = computerScore;
+			}else{
+				result.textContent = 'Player Won';
+				playerScore++;
+				playerScoreBoard.textContent = playerScore;
+			}
+		}
+	}
+
+	// Function to run when game is over
+	const gameOver = (playerOptions,movesLeft) => {
+
+		const chooseMove = document.querySelector('.move');
+		const result = document.querySelector('.result');
+		const reloadBtn = document.querySelector('.reload');
+
+		playerOptions.forEach(option => {
+			option.style.display = 'none';
+		})
+
+	
+		chooseMove.innerText = 'Game Over!!'
+		movesLeft.style.display = 'none';
+
+		if(playerScore > computerScore){
+			result.style.fontSize = '2rem';
+			result.innerText = 'You Won The Game'
+			result.style.color = '#308D46';
+		}
+		else if(playerScore < computerScore){
+			result.style.fontSize = '2rem';
+			result.innerText = 'You Lost The Game';
+			result.style.color = 'red';
+		}
+		else{
+			result.style.fontSize = '2rem';
+			result.innerText = 'Tie';
+			result.style.color = 'grey'
+		}
+		reloadBtn.innerText = 'Restart';
+		reloadBtn.style.display = 'flex'
+		reloadBtn.addEventListener('click',() => {
+			window.location.reload();
+		})
+	}
+
+
+	// Calling playGame function inside game
+	playGame();
+	
 }
-function playGame() {
-    for (i= 0; i< 5; i++) {
-        playRound()
-       }
-    }
-// Creating a function for the Computer user choices available.
-function computerPlay() {
-    const rpsChoices = ['rock','paper', 'scissors']
-    return rpsChoices[Math.floor(Math.random() * rpsChoices.length)]
 
-}
-//Adding a single round: Player versus Computer... with these style of functions there are shortcuts to optimize them so you do you not have to write out all the code constistenly 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === 'rock'){
-        switch (computerSeelction) {
-            case 'rock':
-                roundCount++;
-                head.Content = `It/'s a draw, you both oicked $(playerSelection.toLowercase()}!`;
-                break;
-            case 'paper':
-                computerWin++;
-                roundCount++;
-                head.textContent = `You lose, ${computerSelection} beats ${playerSelection.toLowerCase()}!`;
-                break;
-                `scissors`;
-                playerWin++;
-                roundCount++;
-                head.textConent =  `You win, ${playerSelection.toLowerCase()} beats ${computerSelection}!`;
-                break;
-                default:
-                    return "uh no.. something went wrong."
-                    //This s being added just in case the computer p;ay function breaks or does not fumction properly.
-        }
-    }else if (playerSelection ---'paper'){
-        switch (computerSelection){
-            case 'rock':
-                playerWin++;
-                roundCount++;
-                head.textContent =`'You win, ${playerSelection.toLowerCase()} beats ${computerSelection}!`;
-                break;
-            case 'paper':
-                roundCount++;
-                head.textContent = `It/'s a draw you both picked ${playerSelection.toLowerCase()}!`;
-                break;
-            case 'scissors':
-                computerWin++;
-                roundCoun++;
-                head.textContent =`Youse lose, ${computerSelection} nrsyd ${PlayerSelection.toLowerCase()}!`;
-                break;
-            default;
-                return "Uh no.. something went wrong here.";
-                // Created in case computer play functions are not working probably
-        }
-    } else if (playerSelection === 'Scissors') {
-        switch (computerSelection) {
-            case 'paper':
-                playerWin++;
-                roundCount++;
-                head.textContent = `You win, ${playerSelection.toLowerCase()} beats ${computerSelection}!`;
-                 break;
-            case 'rock':
-                computerWin++;
-                roundCount++;
-                head.textContent = `You lose, ${computerSelection.toLowerCase()} beats ${playerSelection}!`;
-                break;
-            case 'scissors':
-                    roundCount++;
-                    head.textContent = `Its a draw you both picked ${playerSelection.toLowerCase}!`;
-                break;
-                default:
-                    return "Uh no.. something went wrong here.";
-                    //a function in case computer play functions are not working properly
-            
-
-        }
-    }else {
-        return `You have choose between Rock, Paper, and Scissors! Please Try Again!`
-
-
-    }
-}
-const body = document.querySelector('body');
-const head = document.querySelector('h1');
-const buttons = document.querySelector('button');
-const playerScore = document.querySelector('#playerScore');
-const computerScore = document.querySelector('#computerScore');
-const  replayBtn = document.querySelector('button');
-replayBtn.classList.add('replayBTn');
-replayBtn.textContent = 'Play Again';
-
-buttons.forEach((button)=> {
-    button.addEventListener('click', () => {
-        if (playerWin === 5 || computerWin === 5) {
-            console.log(`*start noises`);
-        }else {
-            playRound (button.id,computerPlay());
-            playerScore.textContent = 'player: ${playerWin}';
-            computerScore.textContent = 'computer: ${computerWin}';
-         if (playerWin ===5) {
-                head.textContent = 'Congratulations! You won a Game of RPS!';
-                buttons.forEach((button) => {
-                    button.classList.toggle('proof')
-                });
-                body.appendChild(replayBtn);
-            }else if (computerWin ===5) {
-                head.textContent = 'oh no!! You have lost the game to the computer.Keep on practing and Best of luck next time!'
-                buttons.forEach((button) => {
-                    button.classList.toggle('proof')
-                 } );
-                 body.appendChild(replayBtn);
-                }
-        }    
-    });
-}); 
-    
-replayBtn.addEventListener('click', () => {
-    reset();
-    buttons.forEach((button) => {
-        button.classLIst.toggle('proof')
-    });
-    body.removeChild(replayBtn);
-});
-
-
+// Calling the game function
+game();
